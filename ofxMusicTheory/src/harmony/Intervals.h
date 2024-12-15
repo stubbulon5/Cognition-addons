@@ -296,10 +296,6 @@ class Intervals {
             fifth_steps.push_back(ofSplitString("seventh,7,11",","));
             fifth_steps.push_back(ofSplitString("fourth,4,5",","));
             
-            
-           
-            
-            
                 //Count half steps between note1 and note2
            int half_notes = Intervals::measure(note1, note2);
                 //Get the proper list from the number of fifth steps
@@ -356,7 +352,7 @@ class Intervals {
                 }
             }
     
-        
+        return "";
             
     }
     

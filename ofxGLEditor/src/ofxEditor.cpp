@@ -48,7 +48,7 @@
 #define CURSOR_MAX_HEIGHT 40
 
 // timeout between chars when building an undo action
-#define UNDO_TIMEOUT 0
+#define UNDO_TIMEOUT 1000
 
 // uncomment to see the viewport and auto focus bounding boxes
 //#define DEBUG_AUTO_FOCUS
@@ -73,7 +73,7 @@ float ofxEditor::s_autoFocusMinScale = 0.5;
 float ofxEditor::s_autoFocusMaxScale = 5.0;
 
 bool ofxEditor::s_undo = true;
-unsigned int ofxEditor::s_undoMaxDepth = 100;
+unsigned int ofxEditor::s_undoMaxDepth = 10;
 
 // use CMD on OSX, CTRL for Windows & Linux by default
 #ifdef __APPLE__
@@ -189,6 +189,8 @@ ofxEditor::~ofxEditor() {
 
 //--------------------------------------------------------------
 bool ofxEditor::loadFont(const std::string &font, int size) {
+
+	bool loaded = false;
 	
 	string path = ofToDataPath(font);
 	if(!ofFile::doesFileExist(path)) {
@@ -206,8 +208,10 @@ bool ofxEditor::loadFont(const std::string &font, int size) {
 		s_charHeight = s_font->stringHeight("#ITqg"); // catch tall chars & chars which may hang down
 		s_cursorWidth = MAX(floor(s_charWidth*0.3), 6);
 		s_autoFocusError = MAX(floor(s_charHeight*0.5), 16); // make sure the error space is proportional to the glyph size
+		loaded = true;
 	}
-	return true;
+
+	return loaded;
 }
 
 //--------------------------------------------------------------
@@ -1127,7 +1131,7 @@ void ofxEditor::resize(int width, int height) {
 //--------------------------------------------------------------
 bool ofxEditor::openFile(std::string filename) {
 	ofFile file;
-	if(!file.open(filename, ofFile::ReadOnly)) {
+	if(!file.open(ofToDataPath(filename), ofFile::ReadOnly)) {
 		ofLogError("ofxEditor") << "couldn't load \""
 			<< ofFilePath::getFileName(filename) << "\"";
 		return false;
@@ -1142,7 +1146,7 @@ bool ofxEditor::openFile(std::string filename) {
 //--------------------------------------------------------------
 bool ofxEditor::saveFile(std::string filename) {
 	ofFile file;
-	if(!file.open(filename, ofFile::WriteOnly)) {
+	if(!file.open(ofToDataPath(filename), ofFile::WriteOnly)) {
 		ofLogError("ofxEditor") << "couldn't save \""
 			<< ofFilePath::getFileName(filename) << "\"";
 		return false;

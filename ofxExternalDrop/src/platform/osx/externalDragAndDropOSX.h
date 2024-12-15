@@ -19,7 +19,7 @@ public:
     }
 
     NSView* getNSViewForDragEvent() {
-        NSWindow* nativeWindow = (NSWindow*)ofGetCocoaWindow();
+        NSWindow* nativeWindow = (__bridge NSWindow*)ofGetCocoaWindow();
         return [nativeWindow contentView];
     }
 
@@ -34,7 +34,7 @@ public:
             @autoreleasepool {
 
                 if (auto event = [[view window] currentEvent]) {
-                    auto dragItems = [[[NSMutableArray alloc] init] autorelease];
+                    auto dragItems = [[NSMutableArray alloc] init];
 
                     for(int i=0; i<files.size(); i++) {
                         cout << "FILE:->" << files[i] << "\n";
@@ -56,11 +56,11 @@ public:
                         NSLog(@"DRAGGED FILE IS %@",nsFilename );
 
                         [dragItems addObject: dragItem];
-                        [dragItem release];
+    //                     [dragItem release];
 
                     }
                     
-                    auto helper = [[[NSDraggingSourceHelper alloc] init] autorelease];
+                    auto helper = [[NSDraggingSourceHelper alloc] init];
 
                     [helper setSource:view andDraggingFinishedSelector:draggingFinishedSelector];
 

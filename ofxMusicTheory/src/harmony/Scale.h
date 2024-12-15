@@ -2089,6 +2089,7 @@ class Scale : public enable_shared_from_this<Scale> {
             return 0;
         }else{
             ofLogWarning()<<"Scale invalid"<<endl;
+            return NotePtr();
         }
     }
     
@@ -2106,6 +2107,7 @@ class Scale : public enable_shared_from_this<Scale> {
             return 0;
         }else{
             ofLogWarning()<<"Scale invalid"<<endl;
+            return NotePtr();
         }
     }
     
@@ -2130,6 +2132,7 @@ class Scale : public enable_shared_from_this<Scale> {
             
         }else{
             ofLogWarning()<<"Scale invalid"<<endl;
+            return NotePtr();
         }
     }
 
@@ -2150,6 +2153,7 @@ class Scale : public enable_shared_from_this<Scale> {
             
         }else{
             ofLogWarning()<<"Scale invalid"<<endl;
+            return -1;//not found
         }
     }
     
@@ -2190,6 +2194,7 @@ class Scale : public enable_shared_from_this<Scale> {
             ofLogWarning()<<"Scale invalid"<<endl;
             return note->copy();
         }
+        return NotePtr();
     }
 
 
