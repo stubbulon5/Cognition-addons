@@ -1,0 +1,1 @@
+Modified versions of the mac, linux and win32 folders are moved to the root platform folder of the plugin (to fit in with the OF build system)
