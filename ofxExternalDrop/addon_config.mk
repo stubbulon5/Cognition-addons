@@ -1,9 +1,9 @@
 meta:
 	ADDON_NAME = ofxExternalDrop
 	ADDON_DESCRIPTION = External Drag and Drop for OpenFrameworks
-	ADDON_AUTHOR = Stubbulon5 and P. Potter
+	ADDON_AUTHOR = stubbulon5 and PhilPotter
 	ADDON_TAGS = "Drag" "Drop" "UI" "midi" "cross platform"
-	ADDON_URL = http://github.com/<TODO>
+	ADDON_URL = https://github.com/stubbulon5/ofxExternalDrop
 
 common:
 	ADDON_INCLUDES += src/
