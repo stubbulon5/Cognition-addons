@@ -13,20 +13,18 @@
 class ofxExternalDrop {
 
 public:
-    ofxExternalDrop(bool init) {
-        if (init) {
-            drop = externalDragAndDrop();
-        }
-    }
+    ofxExternalDrop() { }
 
-    ofxExternalDrop() {
+    bool getDragInitiated() {
+        return dragInitiated;
     }    
-    
+
     bool getIsDragging() {
         return drop.getIsDragging();
     }
 
-    bool externalDragAndDropFileInit(vector<string> files) {
+    bool externalDragAndDropFileInit(std::vector<std::string> files) {
+        dragInitiated = true;
         return drop.externalDragAndDropFileInit(files);
     }
 
@@ -38,8 +36,10 @@ public:
        if(drop.getIsDragging()) {
            drop.handleExternalDragAndDropButtonReleaseEvent();
        }
+       dragInitiated = false;
     }
 
 private:
     externalDragAndDrop drop;
+    bool dragInitiated = false;
 };
